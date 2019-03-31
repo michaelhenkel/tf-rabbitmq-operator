@@ -1,0 +1,11 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: tf-rabbitmq-operator
+subjects:
+- kind: ServiceAccount
+  name: tf-rabbitmq-operator
+roleRef:
+  kind: Role
+  name: tf-rabbitmq-operator
+  apiGroup: rbac.authorization.k8s.io
