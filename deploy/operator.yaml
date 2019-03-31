@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tf-rabbitmq-operator
+  namespace: contrail
 spec:
   replicas: 1
   selector:
@@ -12,11 +13,19 @@ spec:
       labels:
         name: tf-rabbitmq-operator
     spec:
+      nodeSelector:
+          node-role.kubernetes.io/master: ''
+      tolerations:
+      - operator: Exists
+        effect: NoSchedule
+      - operator: Exists
+        effect: NoExecute
+      hostNetwork: true
       serviceAccountName: tf-rabbitmq-operator
       containers:
         - name: tf-rabbitmq-operator
           # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: docker.io/michaelhenkel/rabbitmq-tf-operator:v0.0.1
           command:
           - tf-rabbitmq-operator
           imagePullPolicy: Always

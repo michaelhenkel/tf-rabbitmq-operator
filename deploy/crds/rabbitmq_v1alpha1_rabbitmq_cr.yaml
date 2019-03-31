@@ -1,0 +1,11 @@
+apiVersion: rabbitmq.tungstenfabric.io/v1alpha1
+kind: Rabbitmq
+metadata:
+  name: rabbitmq
+  namespace: contrail
+spec:
+  # Add fields here
+  size: 3
+  hostnetwork: true
+  registry: docker.io/michaelhenkel
+  version: 5.1.1-dev3
